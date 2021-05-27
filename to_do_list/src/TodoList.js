@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import Show from "./Show";
  
 class TodoList extends Component {
   constructor(props){
@@ -15,11 +15,23 @@ class TodoList extends Component {
       typeValue: typedValue
     })
   }
-  addItem = () =>{
+  addItem = (e) =>{
     var typevalue2= this.state.typeValue
     console.log(typevalue2)
     this.setState({
-      items: [...this.state.items, typevalue2]
+      items: [...this.state.items, 
+        {
+          id: Date.now(),
+          list: typevalue2
+        }
+      ],
+      typeValue: ""
+    })
+  }
+  deleteItem = (ele) =>{
+    console.log(ele)
+    this.setState({
+      items: this.state.items.filter(e => e.id !== ele.id )
     })
   }
 
@@ -30,13 +42,15 @@ class TodoList extends Component {
     return (
       <div className="todoListMain">
         <div className="header">
-          <form>
-            <input placeholder="enter task" 
-              onChange={(e) => this.handleInput(e.target.value)}
-            ></input>
-            <button onClick={this.addItem}>ADD</button>
-          </form>
+          <input value={this.state.typeValue} 
+            onChange={(e) => this.handleInput(e.target.value)}
+          ></input>
+          <button onClick={this.addItem}>ADD</button>
         </div>
+        <Show 
+          items={this.state.items} 
+          deleteItem = {this.deleteItem}
+          />
       </div>
     );
   }
