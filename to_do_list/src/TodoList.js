@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Show from "./Show";
  
-class TodoList extends Component {
+function TodoList () {
   constructor(props){
     super(props);
     this.state={
@@ -34,10 +34,6 @@ class TodoList extends Component {
       items: this.state.items.filter(e => e.id !== ele.id )
     })
   }
-
-  render() {
-    console.log(this.state.typeValue)
-    console.log(this.state.items)
     
     return (
       <div className="todoListMain">
@@ -53,6 +49,4 @@ class TodoList extends Component {
           />
       </div>
     );
-  }
 }
-export default TodoList;
