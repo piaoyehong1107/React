@@ -38,15 +38,15 @@ function TodoList () {
   //     items: this.state.items.filter(e => e.id !== ele.id )
   //   })
   // }
-    
+  console.log(items)
     return (
       <div className="todoListMain">
         <div className="header">
-          <input value={this.state.typeValue} 
+          <input 
             onChange={(e) => setType(e.target.value)}
           ></input>
-          <button onClick={setItems(
-            [...this.state.items,
+          <button onClick={()=>setItems(
+            [...items,
               {
                 id: Date.now(),
                 list: typevalue
@@ -54,10 +54,10 @@ function TodoList () {
             ]
           )} >ADD</button>
         </div>
-        <Show 
-          items={this.state.items} 
+        {/* <Show 
+          items= items 
           deleteItem = {this.deleteItem}
-          />
+          /> */}
       </div>
     );
 }
