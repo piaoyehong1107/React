@@ -9,7 +9,7 @@ function Show({
       <div className="header">
         {items.map(ele => (
           <li>
-            {ele.list} <button onClick={() => deleteItem(ele)}>DELETE</button>
+            {ele.memo} <button onClick={() => deleteItem(ele)}>DELETE</button>
           </li>
         ))}
       </div>
