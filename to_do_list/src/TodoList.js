@@ -1,10 +1,12 @@
 import React, { Component, useState } from "react";
 import Show from "./Show";
- 
-function TodoList () {
+import { v4 } from 'uuid'
 
-  const[typevalue, setType] = useState("");
-  const[items,setItems] = useState([]);
+function TodoList() {
+
+  const [typeValue, setType] = useState("");
+  const [items, setItems] = useState([]);
+  console.log(items)
   // constructor(props){
   //   super(props);
   //   this.state={
@@ -12,7 +14,7 @@ function TodoList () {
   //     items: []
   //   };
   // }
-  
+
   // handleInput = (typedValue) =>{
   //   setType(typedValue)
   //   // this.setState({
@@ -32,33 +34,40 @@ function TodoList () {
   //     typeValue: ""
   //   })
   // }
-  // deleteItem = (ele) =>{
-  //   console.log(ele)
-  //   this.setState({
-  //     items: this.state.items.filter(e => e.id !== ele.id )
-  //   })
-  // }
-  console.log(items)
-    return (
-      <div className="todoListMain">
-        <div className="header">
-          <input 
-            onChange={(e) => setType(e.target.value)}
-          ></input>
-          <button onClick={()=>setItems(
-            [...items,
-              {
-                id: Date.now(),
-                list: typevalue
-              }
-            ]
-          )} >ADD</button>
-        </div>
-        {/* <Show 
-          items= items 
-          deleteItem = {this.deleteItem}
-          /> */}
+  const deleteItem = (e) => {
+    console.log(e)
+    setItems(items.filter(item => item.id !== e.id))
+    // this.setState({
+    //   items: this.state.items.filter(e => e.id !== ele.id)
+    // })
+  }
+
+  const handleClick = () => {
+    setItems(
+      [...items,
+      {
+        id: v4(),
+        list: typeValue
+      }
+      ]
+    )
+    setType('')
+  }
+
+  return (
+    <div className="todoListMain">
+      <div className="header">
+        <input
+          value={typeValue}
+          onChange={(e) => setType(e.target.value)}
+        ></input>
+        <button onClick={handleClick} >ADD</button>
       </div>
-    );
+      <Show
+        items={items}
+        deleteItem={deleteItem}
+      />
+    </div>
+  );
 }
 export default TodoList
